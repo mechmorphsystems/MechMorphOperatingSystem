@@ -1,0 +1,20 @@
+#line 1 "/home/vasya/arduino/MechMorphOperatingSystem/.vscode/settings.json"
+{
+    "files.associations": {
+        "droidlogicinterface": "cpp",
+        "*.tcc": "cpp",
+        "optional": "cpp",
+        "istream": "cpp",
+        "ostream": "cpp",
+        "ratio": "cpp",
+        "system_error": "cpp",
+        "array": "cpp",
+        "functional": "cpp",
+        "tuple": "cpp",
+        "type_traits": "cpp",
+        "utility": "cpp",
+        "variant": "cpp",
+        "random": "cpp",
+        "streambuf": "cpp"
+    }
+}
