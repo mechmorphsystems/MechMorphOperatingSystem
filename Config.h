@@ -1,5 +1,10 @@
 #define DEBUG
 
+// #define DO_DROID
+// #define BR2U_DROID
+// #define MINI_SENTRY_DROID
+#define MINI_GONK_DROID
+
 // Controller configuration
 #define STICK_DEADZONE 30
 

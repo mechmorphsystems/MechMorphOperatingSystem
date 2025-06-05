@@ -2,14 +2,26 @@
 
 #include <Arduino.h>
 #include "Config.h"
-// #include "src/DroidsLigic/DO/DOLogic.h"
-// #include "src/DroidsLigic/BR2U/BR2ULogic.h"
+
+#ifdef DO_DROID
+#include "src/DroidsLigic/DO/DOLogic.h"
+DOLogic droidLogic;
+#endif
+
+#ifdef BR2U_DROID
+#include "src/DroidsLigic/BR2U/BR2ULogic.h"
+BR2ULogic droidLogic;
+#endif
+
+#ifdef MINI_SENTRY_DROID
 #include "src/DroidsLigic/MiniSentry/MiniSentryLogic.h"
-
-// DOLogic droidLogic;
-// BR2ULogic droidLogic;
 MiniSentryLogic droidLogic;
+#endif
 
+#ifdef MINI_GONK_DROID
+#include "src/DroidsLigic/MiniGonk/MiniGonkLogic.h"
+MiniGonkLogic droidLogic;
+#endif
 
 void setup()
 {
@@ -23,6 +35,4 @@ void setup()
 void loop()
 {
     droidLogic.run();
-
-    // vTaskDelay(1);
 }

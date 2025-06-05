@@ -18,10 +18,6 @@ class DfPlayerMini : public SoundPlayerInterface
                     Serial.println(F("1.Please recheck the connection!"));
                     Serial.println(F("2.Please insert the SD card!"));
                 #endif
-                
-                // while(true){
-                //     delay(0);
-                // }
             }
         
             #ifdef DEBUG
@@ -36,9 +32,16 @@ class DfPlayerMini : public SoundPlayerInterface
         {
             player.play(fileNumber);
         }
+        void loop()
+        {
+            if (millis() - loopTimer > loopTimeout) {
+                loopTimer = millis();
+                player.next();
+            }
+        }
     private:
         DFRobotDFPlayerMini player;
         uint8_t volumeLevel = 30;
-        uint16_t loopTimeout = 0;
+        uint16_t loopTimeout = 15000;
         uint32_t loopTimer = 0;
 };
