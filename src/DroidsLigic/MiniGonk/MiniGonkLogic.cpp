@@ -175,28 +175,6 @@ void MiniGonkLogic::motion()
 
 void MiniGonkLogic::debounce()
 {
-    // for (uint8_t i = 0; i <= 1; i++)
-    // {
-    //     bool btnState = !digitalRead(0 == i ? MINI_GONK_LEFT_SWITCH_PIN : MINI_GONK_RIGHT_SWITCH_PIN);
-    //     if (btnState && !(0 == i ? leftDebounced : rightDebounced)) {  // обработчик нажатия
-    //         if (0 == i) {
-    //             leftDebounced = true;
-    //         } else {
-    //             rightDebounced = true;
-    //         }
-    //     }
-    //     if (!btnState && (0 == i ? leftDebounced : rightDebounced)) {  // обработчик отпускания
-    //         if (0 == i) {
-    //             leftDebounced = false;
-    //         } else {
-    //             rightDebounced = false;
-    //         }
-    //         //Serial.println("release");
-    //     }
-    // }
-    
-    
-
     if (digitalRead(MINI_GONK_LEFT_SWITCH_PIN)) { //shift in a one
         leftBitTrain <<= 1;
         leftBitTrain |= 1;
