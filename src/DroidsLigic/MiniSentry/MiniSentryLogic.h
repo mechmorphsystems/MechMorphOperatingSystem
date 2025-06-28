@@ -7,6 +7,7 @@
 #include "../../Movement/ImprovedServo.h"
 #include "../../Movement/Esc.h"
 #include "../../../Config.h"
+#include "../../ScriptedAnimation/AnimationRunners/MiniSentryAnimationRunner.h"
 
 class MiniSentryLogic : public DroidLogicInterface
 {
@@ -21,6 +22,7 @@ class MiniSentryLogic : public DroidLogicInterface
         Esc esc1;
         Esc esc2;
         Esc esc3;
+        MiniSentryAnimationRunner animationRunnrer;
         float yValue;
         float xValue;
         float theta;

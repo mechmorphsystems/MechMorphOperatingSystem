@@ -28,22 +28,26 @@ void MiniSentryLogic::init()
         MINI_SENTRY_ESC_3_REVERSE
     );
 
-    // leftDoorServo.setup(
-    //     MINI_SENTRY_LEFT_DOOR_SERVO_PIN
-    // );
-
-    // rightDoorServo.setup(
-    //     MINI_SENTRY_RIGHT_DOOR_SERVO_PIN
-    // );
-
-    // leftDoorServo.init();
-    // rightDoorServo.init();
-    // leftDoorServo.writeAngle(MINI_SENTRY_LEFT_DOOR_ZERO_ANGLE);
-    // rightDoorServo.writeAngle(MINI_SENTRY_RIGHT_DOOR_ZERO_ANGLE);
     esc1.init();
     esc2.init();
     esc3.init();
 
+
+    leftDoorServo.setup(
+        MINI_SENTRY_LEFT_DOOR_SERVO_PIN
+    );
+
+    rightDoorServo.setup(
+        MINI_SENTRY_RIGHT_DOOR_SERVO_PIN
+    );
+
+    leftDoorServo.init();
+    rightDoorServo.init();
+    leftDoorServo.writeAngle(MINI_SENTRY_LEFT_DOOR_ZERO_ANGLE);
+    rightDoorServo.writeAngle(MINI_SENTRY_RIGHT_DOOR_ZERO_ANGLE);
+
+    animationRunnrer.setup(&leftDoorServo, &rightDoorServo);
+    
     for (uint8_t i = 0; i < 7; i++) {
         pinMode(leds[i], OUTPUT);
     }
@@ -57,15 +61,13 @@ void MiniSentryLogic::run()
     movement();
     ledBlink();
 
-    // if (controller.squareButtonClick()) {
-    //     leftDoorServo.writeAngle(180);
-    //     rightDoorServo.writeAngle(0);
-    // }
+    if (controller.triangleButtonClick() || animationRunnrer.isRunnung()) {
+        animationRunnrer.run(0);
+    }
 
-    // if (controller.croossButtonClick()) {
-    //     leftDoorServo.writeAngle(MINI_SENTRY_LEFT_DOOR_ZERO_ANGLE);
-    //     rightDoorServo.writeAngle(MINI_SENTRY_RIGHT_DOOR_ZERO_ANGLE);
-    // }
+    if (controller.croossButtonClick()) {
+        animationRunnrer.stop();
+    }
 
     
 }
