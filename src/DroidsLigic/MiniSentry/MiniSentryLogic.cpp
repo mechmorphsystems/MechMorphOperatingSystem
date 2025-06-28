@@ -43,12 +43,19 @@ void MiniSentryLogic::init()
     esc1.init();
     esc2.init();
     esc3.init();
+
+    for (uint8_t i = 0; i < 7; i++) {
+        pinMode(leds[i], OUTPUT);
+    }
+
+    pinMode(RANDOM_SEED_PIN, INPUT);
 }
 
 void MiniSentryLogic::run()
 {
     controller.update();
     movement();
+    ledBlink();
 
     // if (controller.squareButtonClick()) {
     //     leftDoorServo.writeAngle(180);
@@ -94,4 +101,21 @@ void MiniSentryLogic::movement()
     esc1.run(esc1Speed);
     esc2.run(esc2Speed);
     esc3.run(esc3Speed);
+}
+
+void MiniSentryLogic::ledBlink()
+{
+    if (millis() - ledTimer >= 100) {
+        // save the last time you blinked the LED
+        ledTimer = millis();
+        randomSeed(analogRead(RANDOM_SEED_PIN));
+
+        digitalWrite(leds[ledPosition], random(100) > 50 ? HIGH : LOW);
+
+        ledPosition ++;
+
+        if (ledPosition > 4) {
+            ledPosition = 0;
+        }
+    }
 }

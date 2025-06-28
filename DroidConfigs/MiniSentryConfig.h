@@ -1,9 +1,20 @@
 // pin configuration
 #define MINI_SENTRY_LEFT_DOOR_SERVO_PIN 21
 #define MINI_SENTRY_RIGHT_DOOR_SERVO_PIN 19
+
 #define MINI_SENTRY_ESC_1_PIN 32
 #define MINI_SENTRY_ESC_2_PIN 23
 #define MINI_SENTRY_ESC_3_PIN 22
+
+#define LED_1_PIN 33
+#define LED_2_PIN 25
+#define LED_3_PIN 26
+#define LED_4_PIN 27
+#define LED_5_PIN 14
+#define LEFT_DOOR_LED_PIN 18
+#define RIGHT_DOOR_LED_PIN 5
+
+#define RANDOM_SEED_PIN 36
 
 
 // ESC configuration

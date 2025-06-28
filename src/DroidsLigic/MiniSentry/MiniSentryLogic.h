@@ -29,5 +29,17 @@ class MiniSentryLogic : public DroidLogicInterface
         float esc1Speed;
         float esc2Speed;
         float esc3Speed;
+        uint32_t ledTimer = 0;
+        uint8_t ledPosition = 0;
+        uint8_t PROGMEM leds[7] = {
+            LED_1_PIN,
+            LED_2_PIN,
+            LED_3_PIN,
+            LED_4_PIN,
+            LED_5_PIN,
+            LEFT_DOOR_LED_PIN,
+            RIGHT_DOOR_LED_PIN
+        };
         void movement();
+        void ledBlink();
 };
