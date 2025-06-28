@@ -6,6 +6,7 @@
 #include "../../Controllers/GamepadController.h"
 #include "../../Movement/ImprovedServo.h"
 #include "../../Movement/Esc.h"
+#include "../../../Config.h"
 
 class MiniSentryLogic : public DroidLogicInterface
 {
@@ -20,4 +21,13 @@ class MiniSentryLogic : public DroidLogicInterface
         Esc esc1;
         Esc esc2;
         Esc esc3;
+        float yValue;
+        float xValue;
+        float theta;
+        float magnitude;
+        float rotation;
+        float esc1Speed;
+        float esc2Speed;
+        float esc3Speed;
+        void movement();
 };

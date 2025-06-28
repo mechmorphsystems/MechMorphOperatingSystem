@@ -8,21 +8,24 @@ void MiniSentryLogic::init()
         MINI_SENTRY_ESC_1_PIN,
         MINI_SENTRY_CENTER_ESC_MICROSECONDS,
         MINI_SENTRY_MIN_ESC_MICROSECONDS,
-        MINI_SENTRY_MAX_ESC_MICROSECONDS
+        MINI_SENTRY_MAX_ESC_MICROSECONDS,
+        MINI_SENTRY_ESC_1_REVERSE
     );
 
     esc2.setup(
         MINI_SENTRY_ESC_2_PIN,
         MINI_SENTRY_CENTER_ESC_MICROSECONDS,
         MINI_SENTRY_MIN_ESC_MICROSECONDS,
-        MINI_SENTRY_MAX_ESC_MICROSECONDS
+        MINI_SENTRY_MAX_ESC_MICROSECONDS,
+        MINI_SENTRY_ESC_2_REVERSE
     );
 
     esc3.setup(
         MINI_SENTRY_ESC_3_PIN,
         MINI_SENTRY_CENTER_ESC_MICROSECONDS,
         MINI_SENTRY_MIN_ESC_MICROSECONDS,
-        MINI_SENTRY_MAX_ESC_MICROSECONDS
+        MINI_SENTRY_MAX_ESC_MICROSECONDS,
+        MINI_SENTRY_ESC_3_REVERSE
     );
 
     // leftDoorServo.setup(
@@ -45,10 +48,7 @@ void MiniSentryLogic::init()
 void MiniSentryLogic::run()
 {
     controller.update();
-
-    esc1.run(controller.getBrakeThrottleMixed());
-    esc2.run(controller.getBrakeThrottleMixed());
-    esc3.run(controller.getBrakeThrottleMixed());
+    movement();
 
     // if (controller.squareButtonClick()) {
     //     leftDoorServo.writeAngle(180);
@@ -59,5 +59,39 @@ void MiniSentryLogic::run()
     //     leftDoorServo.writeAngle(MINI_SENTRY_LEFT_DOOR_ZERO_ANGLE);
     //     rightDoorServo.writeAngle(MINI_SENTRY_RIGHT_DOOR_ZERO_ANGLE);
     // }
+
     
+}
+
+void MiniSentryLogic::movement()
+{
+    yValue  = controller.getRightY();
+    xValue  = controller.getRightX();
+    rotation  = controller.getBrakeThrottleMixed();
+
+    // Convert the input values to direction vectors///////////////////////////
+    theta = atan2(yValue, xValue);
+    magnitude = sqrt((yValue * yValue) + (xValue * xValue));
+
+    if (magnitude > 75.0f || rotation > STICK_DEADZONE || rotation < -STICK_DEADZONE) { // the f is a float number to check against i.e. 1/3 = 0.33333
+        float vx = magnitude * cos(theta);
+        float vy = magnitude * sin(theta);
+        const float sqrt3o2 = 1.0 * sqrt(3) / 2;
+
+        //Find wheel vecotrs and do math stuff/////////////////////////////////////////////////////////
+        esc1Speed = -vx;                     // v dot [-1, 0] / 25mm               // the 25mm represents the radius of the omniwheel to calculate the angular velocity
+        esc2Speed = 0.5 * vx - sqrt3o2 * vy; // v dot [1/2, -sqrt(3)/2] / 25mm
+        esc3Speed = 0.5 * vx + sqrt3o2 * vy; // v dot [1/2, +sqrt(3)/2] / 25mm
+
+        esc1Speed = constrain(esc1Speed + rotation, -512, 512);
+        esc2Speed = constrain(esc2Speed + rotation, -512, 512);
+        esc3Speed = constrain(esc3Speed + rotation, -512, 512);
+    }
+    else {
+        esc1Speed = esc2Speed = esc3Speed = 0;
+    }
+
+    esc1.run(esc1Speed);
+    esc2.run(esc2Speed);
+    esc3.run(esc3Speed);
 }
