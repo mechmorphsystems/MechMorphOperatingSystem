@@ -23,11 +23,14 @@ void MiniGonkLogic::init()
     leftEsc.init();
     rightEsc.init();
 
-    // player.init();
-    // player.playFile(1);
+    player.init();
+    player.playFile(1);
 
     pinMode(MINI_GONK_LEFT_SWITCH_PIN, INPUT_PULLUP);
     pinMode(MINI_GONK_RIGHT_SWITCH_PIN, INPUT_PULLUP);
+    pinMode(MINI_GONK_LED_1_PIN, OUTPUT);
+    pinMode(MINI_GONK_LED_2_PIN, OUTPUT);
+    pinMode(MINI_GONK_RANDOM_SEED_PIN, INPUT);
 }
 
 void MiniGonkLogic::run()
@@ -41,7 +44,8 @@ void MiniGonkLogic::run()
     while (true)
     {
         controller.update();
-        // player.loop();
+        player.loop();
+        ledBlink();
 
         motion();
     }
@@ -260,4 +264,19 @@ void MiniGonkLogic::runMotors()
             motorsOff();
             break;
     }
+}
+
+void MiniGonkLogic::ledBlink()
+{
+    for (uint8_t i = 0; i < 2; i++) {
+        if (millis() - ledTimers[i] >= ledIntervals[i]) {
+            ledTimers[i] = millis();
+            randomSeed(analogRead(MINI_GONK_RANDOM_SEED_PIN));
+            ledIntervals[i] = random(1000);
+
+            ledStates[i] = !ledStates[i];
+            digitalWrite(leds[i], ledStates[i]);
+        }
+    }
+    
 }
