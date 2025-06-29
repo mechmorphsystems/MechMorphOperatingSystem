@@ -52,7 +52,7 @@ void MiniSentryLogic::init()
         pinMode(leds[i], OUTPUT);
     }
 
-    pinMode(RANDOM_SEED_PIN, INPUT);
+    pinMode(MINI_SENTRY_RANDOM_SEED_PIN, INPUT);
 }
 
 void MiniSentryLogic::run()
@@ -74,7 +74,7 @@ void MiniSentryLogic::run()
 
 void MiniSentryLogic::movement()
 {
-    yValue  = controller.getRightY();
+    yValue  = controller.getLeftY();
     xValue  = controller.getRightX();
     rotation  = controller.getBrakeThrottleMixed();
 
@@ -107,17 +107,14 @@ void MiniSentryLogic::movement()
 
 void MiniSentryLogic::ledBlink()
 {
-    if (millis() - ledTimer >= 100) {
-        // save the last time you blinked the LED
-        ledTimer = millis();
-        randomSeed(analogRead(RANDOM_SEED_PIN));
+    for (uint8_t i = 0; i < 5; i++) {
+        if (millis() - ledTimers[i] >= ledIntervals[i]) {
+            ledTimers[i] = millis();
+            randomSeed(analogRead(MINI_SENTRY_RANDOM_SEED_PIN));
+            ledIntervals[i] = random(1000);
 
-        digitalWrite(leds[ledPosition], random(100) > 50 ? HIGH : LOW);
-
-        ledPosition ++;
-
-        if (ledPosition > 4) {
-            ledPosition = 0;
+            ledStates[i] = !ledStates[i];
+            digitalWrite(leds[i], ledStates[i]);
         }
     }
 }

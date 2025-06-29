@@ -17,8 +17,8 @@ class MiniSentryAnimationRunner : public BaseAnimationRunner
         {
             leftDoorServo->writeAngle(MINI_SENTRY_LEFT_DOOR_ZERO_ANGLE);
             rightDoorServo->writeAngle(MINI_SENTRY_RIGHT_DOOR_ZERO_ANGLE);
-            digitalWrite(LEFT_DOOR_LED_PIN, LOW);
-            digitalWrite(RIGHT_DOOR_LED_PIN, LOW);
+            digitalWrite(MINI_SENTRY_LEFT_DOOR_LED_PIN, LOW);
+            digitalWrite(MINI_SENTRY_RIGHT_DOOR_LED_PIN, LOW);
 
             isRunning = false;
             animationStep = 0;
@@ -31,8 +31,8 @@ class MiniSentryAnimationRunner : public BaseAnimationRunner
                 timer = millis();
                 leftDoorServo->writeAngle(animation[currenAnimation][animationStep][0]);
                 rightDoorServo->writeAngle(animation[currenAnimation][animationStep][1]);
-                digitalWrite(LEFT_DOOR_LED_PIN, animation[currenAnimation][animationStep][2]);
-                digitalWrite(RIGHT_DOOR_LED_PIN, animation[currenAnimation][animationStep][3]);
+                digitalWrite(MINI_SENTRY_LEFT_DOOR_LED_PIN, animation[currenAnimation][animationStep][2]);
+                digitalWrite(MINI_SENTRY_RIGHT_DOOR_LED_PIN, animation[currenAnimation][animationStep][3]);
 
                 if (animationStep >= animationSteps[currenAnimation]) {
                     stop();

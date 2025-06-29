@@ -34,13 +34,34 @@ class MiniSentryLogic : public DroidLogicInterface
         uint32_t ledTimer = 0;
         uint8_t ledPosition = 0;
         uint8_t PROGMEM leds[7] = {
-            LED_1_PIN,
-            LED_2_PIN,
-            LED_3_PIN,
-            LED_4_PIN,
-            LED_5_PIN,
-            LEFT_DOOR_LED_PIN,
-            RIGHT_DOOR_LED_PIN
+            MINI_SENTRY_LED_1_PIN,
+            MINI_SENTRY_LED_2_PIN,
+            MINI_SENTRY_LED_3_PIN,
+            MINI_SENTRY_LED_4_PIN,
+            MINI_SENTRY_LED_5_PIN,
+            MINI_SENTRY_LEFT_DOOR_LED_PIN,
+            MINI_SENTRY_RIGHT_DOOR_LED_PIN,
+        };
+        bool ledStates[5] = {
+            false,
+            false,
+            false,
+            false,
+            false,
+        };
+        uint32_t ledTimers[5] = {
+            0,
+            0,
+            0,
+            0,
+            0,
+        };
+        uint16_t ledIntervals[5] = {
+            500,
+            600,
+            700,
+            800,
+            900,
         };
         void movement();
         void ledBlink();

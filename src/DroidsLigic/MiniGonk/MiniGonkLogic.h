@@ -30,7 +30,7 @@ class MiniGonkLogic : public DroidLogicInterface
         bool prevRightSwitch;
         uint8_t PROGMEM leds[2] = {
             MINI_GONK_LED_1_PIN,            
-            MINI_GONK_LED_2_PIN
+            MINI_GONK_LED_2_PIN,
         };
         bool ledStates[2] = {
             false,

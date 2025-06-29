@@ -278,5 +278,4 @@ void MiniGonkLogic::ledBlink()
             digitalWrite(leds[i], ledStates[i]);
         }
     }
-    
 }
