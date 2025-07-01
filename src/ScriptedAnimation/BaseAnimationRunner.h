@@ -16,9 +16,9 @@ class BaseAnimationRunner
             runCurrent();
         }
         void virtual stop() = 0;
-        bool isRunnung()
+        bool isRunnung(uint8_t anumationNumber)
         {
-            return isRunning;
+            return isRunning && anumationNumber == currenAnimation;
         }
     protected:
         bool isRunning = false;

@@ -61,7 +61,7 @@ void MiniSentryLogic::run()
     movement();
     ledBlink();
 
-    if (controller.triangleButtonClick() || animationRunnrer.isRunnung()) {
+    if (controller.triangleButtonClick() || animationRunnrer.isRunnung(0)) {
         animationRunnrer.run(0);
     }
 

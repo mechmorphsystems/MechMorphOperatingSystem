@@ -7,6 +7,7 @@
 #include "../../SoundPlayers/DfPlayerMini.h"
 #include "../../Movement/Esc.h"
 #include "../../Movement/ImprovedServo.h"
+#include "../../ScriptedAnimation/AnimationRunners/BR2UAnimationRunner.h"
 
 class BR2ULogic : public DroidLogicInterface
 {
@@ -19,15 +20,18 @@ class BR2ULogic : public DroidLogicInterface
         GamepadController controller;
         DfPlayerMini player;
         uint32_t timer = 0;
-        Esc steeringEsc;
-        Esc throttleEsc;
+        Esc esc1;
+        Esc esc2;
         ImprovedServo headServo;
         ImprovedServo leftHandServo;
         ImprovedServo rightHandServo;
         ImprovedServo canDoorServo;
         ImprovedServo leftCanServo;
         ImprovedServo rightCanServo;
-        bool isOpenCanDoor = true;
-        bool isLeftCanUp = false;
-        bool isRightCanUp = false;
+        BR2UAnimationRunner animationRunnrer;
+        int16_t yValue;
+        int16_t xValue;
+        int16_t rawLeft;
+        int16_t rawRight;
+        int16_t diff;
 };
