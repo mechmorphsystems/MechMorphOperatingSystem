@@ -3,10 +3,11 @@
 // #define DO_DROID
 // #define BR2U_DROID
 // #define MINI_SENTRY_DROID
-#define MINI_GONK_DROID
+// #define MINI_GONK_DROID
+#define MINI_R2D2_DROID
 
 // Controller configuration
-#define STICK_DEADZONE 30
+#define STICK_DEADZONE 40
 
 // Servo configuration
 #define SERVO_ANGLE_LIMIT 90

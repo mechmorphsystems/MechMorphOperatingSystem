@@ -23,6 +23,11 @@ MiniSentryLogic droidLogic;
 MiniGonkLogic droidLogic;
 #endif
 
+#ifdef MINI_R2D2_DROID
+#include "src/DroidsLigic/MiniR2D2/MiniR2D2Logic.h"
+MiniR2D2Logic droidLogic;
+#endif
+
 void setup()
 {
     #ifdef DEBUG
