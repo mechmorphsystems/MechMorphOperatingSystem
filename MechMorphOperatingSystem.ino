@@ -28,6 +28,11 @@ MiniGonkLogic droidLogic;
 MiniR2D2Logic droidLogic;
 #endif
 
+#ifdef MINI_MOUSE_DROID
+#include "src/DroidsLigic/MiniMouse/MiniMouseLogic.h"
+MiniMouseLogic droidLogic;
+#endif
+
 void setup()
 {
     #ifdef DEBUG
