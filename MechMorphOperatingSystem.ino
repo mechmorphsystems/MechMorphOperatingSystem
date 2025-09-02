@@ -33,6 +33,11 @@ MiniR2D2Logic droidLogic;
 MiniMouseLogic droidLogic;
 #endif
 
+#ifdef FERRY_RACER_DROID
+#include "src/DroidsLigic/FerryRacer/FerryRacerLogic.h"
+FerryRacerLogic droidLogic;
+#endif
+
 void setup()
 {
     #ifdef DEBUG
