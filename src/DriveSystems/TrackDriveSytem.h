@@ -1,15 +1,15 @@
 #pragma once
 
 #include <Arduino.h>
-#include "../Movement/Esc.h"
+#include "../Movement/MovementInterface.h"
 
 class TrackDriveSytem
 {
     public:
-        void init(Esc* esc1, Esc* esc2)
+        void init(MovementInterface* motorDriver1, MovementInterface* motorDriver2)
         {
-            TrackDriveSytem::esc1 = esc1;
-            TrackDriveSytem::esc2 = esc2;
+            TrackDriveSytem::motorDriver1 = motorDriver1;
+            TrackDriveSytem::motorDriver2 = motorDriver2;
         }
         void run(int16_t yValue, int16_t xValue)
         {
@@ -22,13 +22,13 @@ class TrackDriveSytem
 
             rawLeft = constrain(rawLeft, -512, 512);
             rawRight = constrain(rawRight, -512, 512);
-            esc1->run(rawRight);
-            esc2->run(rawLeft);
+            motorDriver1->run(rawRight);
+            motorDriver2->run(rawLeft);
 
         }
     private:
-        Esc* esc1;
-        Esc* esc2;
+        MovementInterface* motorDriver1;
+        MovementInterface* motorDriver2;
         int16_t rawLeft;
         int16_t rawRight;
         int16_t diff;
