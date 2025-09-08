@@ -3,6 +3,7 @@
 void FerryRacerLogic::init()
 {
     controller.init();
+    player.init();
 
     throttleEsc.setup(
         FERRY_RACER_THROTTLE_ESC_PIN,
@@ -49,5 +50,18 @@ void FerryRacerLogic::run()
     if (controller.croossButtonClick()) {
         digitalWrite(FERRY_RACER_LEFT_LED_PIN, LOW);
         digitalWrite(FERRY_RACER_RIGHT_LED_PIN, LOW);
+    }
+
+    if (controller.dPadUpClick()) {
+        player.playFile(55);
+    }
+
+    if (controller.dPadDownClick()) {
+        player.playFile(56);
+    }
+
+    if (controller.l1ButtonClick()) {
+        randomSeed(analogRead(FERRY_RACER_RANDOM_SEED_PIN));
+        player.playFile(random(1, 54));
     }
 }

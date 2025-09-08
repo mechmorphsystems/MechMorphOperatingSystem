@@ -7,6 +7,7 @@
 #include "../../Movement/Esc.h"
 #include "../../Movement/ImprovedServo.h"
 #include "../../DriveSystems/CarDriveSystem.h"
+#include "../../SoundPlayers/DfPlayerMini.h"
 
 class FerryRacerLogic
 {
@@ -19,4 +20,5 @@ class FerryRacerLogic
         ImprovedServo steeringServo;
         ImprovedServo headServo;
         CarDriveSystem driveSystem;
+        DfPlayerMini player;
 };
