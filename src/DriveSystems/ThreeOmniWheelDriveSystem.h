@@ -45,11 +45,8 @@ class ThreeOmniWheelDriveSystem
         MovementInterface* motorDriver1;
         MovementInterface* motorDriver2;
         MovementInterface* motorDriver3;
-        float yValue;
-        float xValue;
         float theta;
         float magnitude;
-        float rotation;
         float esc1Speed;
         float esc2Speed;
         float esc3Speed;
