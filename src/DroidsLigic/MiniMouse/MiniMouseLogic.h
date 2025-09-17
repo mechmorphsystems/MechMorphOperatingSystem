@@ -1,12 +1,13 @@
 #pragma once
 
 #include <Arduino.h>
-#include "../../../DroidConfigs/MiniMouseConfig.h"
 #include "../DroidLogicInterface.h"
+#include "../../../DroidConfigs/MiniMouseConfig.h"
 #include "../../Controllers/GamepadController.h"
 #include "../../Movement/Esc.h"
 #include "../../SoundPlayers/DfPlayerMini.h"
 #include "../../Movement/ImprovedServo.h"
+#include "../../DriveSystems/CarDriveSystem.h"
 
 class MiniMouseLogic : public DroidLogicInterface
 {
@@ -18,5 +19,5 @@ class MiniMouseLogic : public DroidLogicInterface
         Esc esc;
         ImprovedServo servo;
         DfPlayerMini player;
-        void motion();
+        CarDriveSystem driveSystem;
 };

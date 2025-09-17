@@ -23,6 +23,8 @@ void MiniMouseLogic::init()
 
     servo.init();
 
+    driveSystem.init(&esc, &servo);
+
     player.init();
     player.playFile(1);
 }
@@ -32,11 +34,5 @@ void MiniMouseLogic::run()
     controller.update();
     player.loop();
 
-    motion();
-}
-
-void MiniMouseLogic::motion()
-{
-    esc.run(controller.getLeftY());
-    servo.run(controller.getRightX());
+    driveSystem.run(controller.getLeftY(), controller.getRightX());
 }
