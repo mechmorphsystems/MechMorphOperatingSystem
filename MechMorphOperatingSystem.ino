@@ -38,6 +38,11 @@ MiniMouseLogic droidLogic;
 FerryRacerLogic droidLogic;
 #endif
 
+#ifdef MINI_CH_33P_DROID
+#include "src/DroidsLigic/MiniCH33P/MiniCH33PLogic.h"
+MiniCH33PLogic droidLogic;
+#endif
+
 void setup()
 {
     #ifdef DEBUG
