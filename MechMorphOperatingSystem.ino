@@ -4,47 +4,47 @@
 #include "Config.h"
 
 #ifdef DO_DROID
-#include "src/DroidsLigic/DO/DOLogic.h"
+#include "src/DroidsLogic/DO/DOLogic.h"
 DOLogic droidLogic;
 #endif
 
 #ifdef BR2U_DROID
-#include "src/DroidsLigic/BR2U/BR2ULogic.h"
+#include "src/DroidsLogic/BR2U/BR2ULogic.h"
 BR2ULogic droidLogic;
 #endif
 
 #ifdef MINI_SENTRY_DROID
-#include "src/DroidsLigic/MiniSentry/MiniSentryLogic.h"
+#include "src/DroidsLogic/MiniSentry/MiniSentryLogic.h"
 MiniSentryLogic droidLogic;
 #endif
 
 #ifdef MINI_GONK_DROID
-#include "src/DroidsLigic/MiniGonk/MiniGonkLogic.h"
+#include "src/DroidsLogic/MiniGonk/MiniGonkLogic.h"
 MiniGonkLogic droidLogic;
 #endif
 
 #ifdef MINI_R2D2_DROID
-#include "src/DroidsLigic/MiniR2D2/MiniR2D2Logic.h"
+#include "src/DroidsLogic/MiniR2D2/MiniR2D2Logic.h"
 MiniR2D2Logic droidLogic;
 #endif
 
 #ifdef MINI_R5D4_DROID
-#include "src/DroidsLigic/MiniR2D2/MiniR5D4Logic.h"
+#include "src/DroidsLogic/MiniR2D2/MiniR5D4Logic.h"
 MiniR5D4Logic droidLogic;
 #endif
 
 #ifdef MINI_MOUSE_DROID
-#include "src/DroidsLigic/MiniMouse/MiniMouseLogic.h"
+#include "src/DroidsLogic/MiniMouse/MiniMouseLogic.h"
 MiniMouseLogic droidLogic;
 #endif
 
 #ifdef FERRY_RACER_DROID
-#include "src/DroidsLigic/FerryRacer/FerryRacerLogic.h"
+#include "src/DroidsLogic/FerryRacer/FerryRacerLogic.h"
 FerryRacerLogic droidLogic;
 #endif
 
 #ifdef MINI_CH_33P_DROID
-#include "src/DroidsLigic/MiniCH33P/MiniCH33PLogic.h"
+#include "src/DroidsLogic/MiniCH33P/MiniCH33PLogic.h"
 MiniCH33PLogic droidLogic;
 #endif
 

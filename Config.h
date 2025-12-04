@@ -4,11 +4,11 @@
 // #define BR2U_DROID
 // #define MINI_SENTRY_DROID
 // #define MINI_GONK_DROID
-// #define MINI_R2D2_DROID
+ #define MINI_R2D2_DROID
 // #define MINI_R5D4_DROID
 // #define MINI_MOUSE_DROID
 // #define FERRY_RACER_DROID
-#define MINI_CH_33P_DROID
+//#define MINI_CH_33P_DROID
 
 // Controller configuration
 #define STICK_DEADZONE 40
