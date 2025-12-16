@@ -74,17 +74,17 @@ void MiniR2D2Logic::run()
 
 
     //  if (controller.squareButtonClick() || animationRunnrer.isRunnung(0))
-    if (controller.squareButtonClick())
-    {
-        if (state) {
-            servoDriver.setPWM(3, 0, 600);
-        } else {
-            servoDriver.setPWM(3, 0, 200);
-        }
+    // if (controller.squareButtonClick())
+    // {
+    //     if (state) {
+    //         servoDriver.setPWM(3, 0, 600);
+    //     } else {
+    //         servoDriver.setPWM(3, 0, 200);
+    //     }
 
-        state = !state;
+    //     state = !state;
         
-    }
+    // }
 
     if (controller.triangleButtonClick() || animationRunnrer.isRunnung(0))
     {
