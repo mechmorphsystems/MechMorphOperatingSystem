@@ -7,25 +7,20 @@ void MiniR2D2Logic::init()
     pinMode(MINI_R2D2_RANDOM_SEED_PIN, INPUT);
 
     #ifdef ESC_DRIVE
-    esc2.setup(
+    drive2.setup(
         MINI_R2D2_ESC_1_PIN,
         MINI_R2D2_CENTER_ESC_MICROSECONDS,
         MINI_R2D2_MIN_ESC_MICROSECONDS,
         MINI_R2D2_MAX_ESC_MICROSECONDS,
         MINI_R2D2_DRIVE_1_REVERSE
     );
-    esc1.setup(
+    drive1.setup(
         MINI_R2D2_ESC_2_PIN,
         MINI_R2D2_CENTER_ESC_MICROSECONDS,
         MINI_R2D2_MIN_ESC_MICROSECONDS,
         MINI_R2D2_MAX_ESC_MICROSECONDS,
         MINI_R2D2_DRIVE_2_REVERSE
     );
-
-    esc2.init();
-    esc1.init();
-
-    driveSystem.init(&esc1, &esc2);
     #endif
 
     #ifdef MX1508_DRIVE
@@ -45,17 +40,18 @@ void MiniR2D2Logic::init()
         MINI_R2D2_MX1508_MAX_LIMIT,
         MINI_R2D2_DRIVE_2_REVERSE
     );
+    
+    #endif
+
     drive1.init();
     drive2.init();
 
     driveSystem.init(&drive1, &drive2);
-    #endif
 
     #ifdef SERVO_HEAD
-    headServo.setup(
+    headDrive.setup(
         MINI_R2D2_HEAD_SERVO_PIN
     );
-    headServo.init();
     #endif
 
     #ifdef MX1508_HEAD
@@ -66,9 +62,9 @@ void MiniR2D2Logic::init()
         MINI_R2D2_MX1508_MIN_LIMIT,
         MINI_R2D2_MX1508_MAX_LIMIT
     );
+    #endif
 
     headDrive.init();
-    #endif
 
     leftArmServo.setup(
         MINI_R2D2_LEFT_ARM_SERVO_PIN,
@@ -160,13 +156,7 @@ void MiniR2D2Logic::run()
         player.playFile(random(1, 54));
     }
 
-    #ifdef SERVO_HEAD
-    headServo.run(controller.getBrakeThrottleMixed());
-    #endif
-
-    #ifdef MX1508_HEAD
     headDrive.run(controller.getBrakeThrottleMixed());
-    #endif
 
     lightLogic.runNeopixelLedLight();
 

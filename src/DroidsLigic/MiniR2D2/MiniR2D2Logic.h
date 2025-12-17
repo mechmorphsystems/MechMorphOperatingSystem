@@ -29,15 +29,15 @@ class MiniR2D2Logic : public DroidLogicInterface
         DfPlayerMini player;
         uint32_t timer = 0;
         #ifdef ESC_DRIVE
-        Esc esc1;
-        Esc esc2;
+        Esc drive1;
+        Esc drive2;
         #endif
         #ifdef MX1508_DRIVE
         Driver2Wire drive1;
         Driver2Wire drive2;
         #endif
         #ifdef SERVO_HEAD
-        ImprovedServo headServo;
+        ImprovedServo headDrive;
         #endif
         #ifdef MX1508_HEAD
         Driver2Wire headDrive;
