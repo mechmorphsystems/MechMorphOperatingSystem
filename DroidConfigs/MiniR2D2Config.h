@@ -1,3 +1,10 @@
+// droid config
+// #define ESC_DRIVE
+// #define MX1508_DRIVE
+#define NEO_PIXEL_LED
+// #define REGULAR_LED
+
+
 // pin configuration
 #define MINI_R2D2_ESC_1_PIN 26
 #define MINI_R2D2_ESC_2_PIN 25
@@ -30,3 +37,7 @@
 #define MINI_R2D2_HOLOPROJECTOR_CENTER_PVM 320
 #define MINI_R2D2_HOLOPROJECTOR_MIN_PVM 275
 #define MINI_R2D2_HOLOPROJECTOR_MAX_PVM 375
+
+// periscope config
+#define MINI_R2D2_PERISCOPE_DOWN_PVM 460
+#define MINI_R2D2_PERISCOPE_UP_PVM 240

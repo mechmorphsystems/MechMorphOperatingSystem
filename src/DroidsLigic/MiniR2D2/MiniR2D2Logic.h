@@ -30,9 +30,9 @@ class MiniR2D2Logic : public DroidLogicInterface
         ImprovedServo rightArmServo;
         ImprovedServo shoulderServo;
         ImprovedServo centerLiftServo;
-        MiniR2D2AnimationRunner animationRunnrer;
-        Adafruit_NeoPixel pixel = Adafruit_NeoPixel(10, MINI_R2D2_NEOPIXEL_PIN, NEO_GRB + NEO_KHZ800);
+        Adafruit_NeoPixel neoPixelLed = Adafruit_NeoPixel(10, MINI_R2D2_NEOPIXEL_PIN, NEO_GRB + NEO_KHZ800);
         Adafruit_PWMServoDriver servoDriver = Adafruit_PWMServoDriver(0x40);
+        MiniR2D2AnimationRunner animationRunnrer;
         MiniR2D2LightLogic lightLogic;
         TrackDriveSytem driveSystem;
         bool holoprojectorStates[3] = {
@@ -51,5 +51,4 @@ class MiniR2D2Logic : public DroidLogicInterface
             700
         };
         void moveHoloprojector();
-        bool state = true;
 };

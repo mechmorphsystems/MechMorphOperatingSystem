@@ -58,16 +58,27 @@ void MiniR2D2Logic::init()
     shoulderServo.init();
     centerLiftServo.init();
 
-    animationRunnrer.setup(&leftArmServo, &rightArmServo, &shoulderServo, &centerLiftServo);
-
-    pixel.begin();
-    pixel.show();
-    pixel.setBrightness(128);
+    neoPixelLed.begin();
+    neoPixelLed.show();
+    neoPixelLed.setBrightness(128);
 
     servoDriver.begin();
     servoDriver.setPWMFreq(50);
 
-    lightLogic.init(&pixel, &servoDriver);
+    lightLogic.init(&neoPixelLed, &servoDriver);
+    animationRunnrer.setup(
+        &player,
+        &driveSystem,
+        &leftArmServo,
+        &rightArmServo,
+        &shoulderServo,
+        &centerLiftServo,
+        &neoPixelLed,
+        &servoDriver
+    );
+
+    servoDriver.setPWM(3, 0, MINI_R2D2_PERISCOPE_DOWN_PVM);
+    servoDriver.setPWM(4, 0, 4096); // low
 }
 
 void MiniR2D2Logic::run()
@@ -76,34 +87,24 @@ void MiniR2D2Logic::run()
 
     driveSystem.run(controller.getLeftY(), controller.getRightX());
 
-    //  if (controller.squareButtonClick() || animationRunnrer.isRunnung(0))
-    // if (controller.squareButtonClick())
-    // {
-    //     if (state) {
-    //         servoDriver.setPWM(3, 0, 240); // up
-    //     } else {
-    //         servoDriver.setPWM(3, 0, 460); //down
-    //     }
-    //     state = !state;
-    // }
-
-    if (controller.triangleButtonClick() || animationRunnrer.isRunnung(0))
-    {
+    if (controller.triangleButtonClick() || animationRunnrer.isRunnung(0)) {
         animationRunnrer.run(0);
     }
 
-    if (controller.croossButtonClick() || animationRunnrer.isRunnung(1))
-    {
+    if (controller.croossButtonClick() || animationRunnrer.isRunnung(1)) {
         animationRunnrer.run(1);
     }
 
-    if (controller.circleButtonClick() || animationRunnrer.isRunnung(2))
-    {
+    if (controller.circleButtonClick() || animationRunnrer.isRunnung(2)) {
         animationRunnrer.run(2);
     }
 
-    if (controller.r1ButtonClick())
-    {
+    if (controller.squareButtonClick() || animationRunnrer.isRunnung(3)) {
+        animationRunnrer.run(3);
+    }
+
+
+    if (controller.r1ButtonClick()) {
         animationRunnrer.stop();
     }
 
