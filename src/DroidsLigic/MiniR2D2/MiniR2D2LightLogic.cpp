@@ -13,7 +13,6 @@ void MiniR2D2LightLogic::runNeopixelLedLight()
             ledTimers[i] = millis();
             randomSeed(analogRead(MINI_R2D2_RANDOM_SEED_PIN));
             ledIntervals[i] = random(1000);
-
             ledStates[i] = !ledStates[i];
             
             if (ledStates[i]) {
@@ -39,7 +38,6 @@ void MiniR2D2LightLogic::runRegularLedLight()
             ledTimers[i] = millis();
             randomSeed(analogRead(MINI_R2D2_RANDOM_SEED_PIN));
             ledIntervals[i] = random(1000);
-
             ledStates[i] = !ledStates[i];
             
             if (ledStates[i]) {
