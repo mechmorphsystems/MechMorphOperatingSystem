@@ -11,13 +11,13 @@
 #include <Adafruit_NeoPixel.h>
 #include <Wire.h>
 #include <Adafruit_PWMServoDriver.h>
+#include "MiniR2D2LightLogic.h"
 
 class MiniR2D2Logic : public DroidLogicInterface
 {
     public:
         void init();
         void run();
-        void NewFunction();
         void runMotor();
     private:
         GamepadController controller;
@@ -33,47 +33,12 @@ class MiniR2D2Logic : public DroidLogicInterface
         MiniR2D2AnimationRunner animationRunnrer;
         Adafruit_NeoPixel pixel = Adafruit_NeoPixel(10, MINI_R2D2_NEOPIXEL_PIN, NEO_GRB + NEO_KHZ800);
         Adafruit_PWMServoDriver servoDriver = Adafruit_PWMServoDriver(0x40);
+        MiniR2D2LightLogic lightLogic;
         int16_t yValue;
         int16_t xValue;
         int16_t rawLeft;
         int16_t rawRight;
         int16_t diff;
-        bool ledStates[10] = {
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false,
-            false
-        };
-        uint32_t ledTimers[10] = {
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-        };
-        uint16_t ledIntervals[10] = {
-            500,
-            600,
-            700,
-            800,
-            900,
-            1000,
-            900,
-            800,
-            700,
-            600
-        };
         bool holoprojectorStates[3] = {
             false,
             false,
@@ -89,10 +54,6 @@ class MiniR2D2Logic : public DroidLogicInterface
             600,
             700
         };
-        void FrontLogicDisplayLight();
-        void RearLogicDisplayLight();
-        void PsiLight();
-        void HoloprojectorLight();
         void moveHoloprojector();
         bool state = true;
 };

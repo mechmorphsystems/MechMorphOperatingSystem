@@ -64,6 +64,8 @@ void MiniR2D2Logic::init()
 
     servoDriver.begin();
     servoDriver.setPWMFreq(50);
+
+    lightLogic.init(&pixel, &servoDriver);
 }
 
 void MiniR2D2Logic::run()
@@ -81,8 +83,6 @@ void MiniR2D2Logic::run()
     //     } else {
     //         servoDriver.setPWM(3, 0, 460); //down
     //     }
-    //     servoDriver.setPWM(4, 4096, 0); // high
-    //     servoDriver.setPWM(4, 0, 4096); // low
     //     state = !state;
     // }
 
@@ -121,12 +121,7 @@ void MiniR2D2Logic::run()
 
     headServo.run(controller.getBrakeThrottleMixed());
 
-    FrontLogicDisplayLight();
-    RearLogicDisplayLight();
-    PsiLight();
-    HoloprojectorLight();
-
-    pixel.show();
+    lightLogic.runNeopixelLedLight();
 
     moveHoloprojector();
 }
@@ -147,102 +142,6 @@ void MiniR2D2Logic::runMotor()
     rawRight = constrain(rawRight, -512, 512);
     esc2.run(rawLeft);
     esc1.run(rawRight);
-}
-
-void MiniR2D2Logic::FrontLogicDisplayLight()
-{
-    for (uint8_t i = 0; i < 2; i++) {
-        if (millis() - ledTimers[i] >= ledIntervals[i]) {
-            ledTimers[i] = millis();
-            randomSeed(analogRead(MINI_R2D2_RANDOM_SEED_PIN));
-            ledIntervals[i] = random(1000);
-
-            ledStates[i] = !ledStates[i];
-            
-            if (ledStates[i]) {
-                pixel.setPixelColor(i, pixel.Color(255, 255, 255));
-            } else {
-                pixel.setPixelColor(i, pixel.Color(0, 0, 255));
-            }
-        }
-    }
-}
-
-void MiniR2D2Logic::RearLogicDisplayLight()
-{
-    for (uint8_t i = 7; i < 10; i++) {
-        if (millis() - ledTimers[i] >= ledIntervals[i]) {
-            ledTimers[i] = millis();
-            randomSeed(analogRead(MINI_R2D2_RANDOM_SEED_PIN));
-            ledIntervals[i] = random(1000);
-
-            ledStates[i] = !ledStates[i];
-            
-            if (ledStates[i]) {
-                pixel.setPixelColor(i, pixel.Color(255, 0, 0));
-            } else {
-                pixel.setPixelColor(i, pixel.Color(0, 255, 0));
-            }
-        }
-    }
-}
-
-
-void MiniR2D2Logic::PsiLight()
-{
-    for (uint8_t i = 2; i < 4; i++) {
-        if (3 == i) {
-            i = 5;
-        }
-        
-        if (millis() - ledTimers[i] >= ledIntervals[i]) {
-            ledTimers[i] = millis();
-            randomSeed(analogRead(MINI_R2D2_RANDOM_SEED_PIN));
-            ledIntervals[i] = random(1000);
-
-            ledStates[i] = !ledStates[i];
-            
-            if (2 == i) {
-                if (ledStates[i]) {
-                    pixel.setPixelColor(i, pixel.Color(0, 255, 0));
-                } else {
-                    pixel.setPixelColor(i, pixel.Color(0, 0, 255));
-                }
-            } else {
-                if (ledStates[i]) {
-                    pixel.setPixelColor(i, pixel.Color(255, 0, 0));
-                } else {
-                    pixel.setPixelColor(i, pixel.Color(255, 255, 0));
-                }
-            }
-        }
-    }
-}
-
-
-void MiniR2D2Logic::HoloprojectorLight()
-{
-    for (uint8_t i = 3; i < 6; i++) {
-        if (5 == i) {
-            i = 6;
-        }
-        
-
-        if (millis() - ledTimers[i] >= ledIntervals[i]) {
-            ledTimers[i] = millis();
-            randomSeed(analogRead(MINI_R2D2_RANDOM_SEED_PIN));
-            ledIntervals[i] = random(1000);
-
-            ledStates[i] = !ledStates[i];
-            
-            if (ledStates[i]) {
-                uint8_t lightLevel = random(0, 255);
-                pixel.setPixelColor(i, pixel.Color(lightLevel, lightLevel, lightLevel));
-            } else {
-                pixel.setPixelColor(i, pixel.Color(0, 0, 0));
-            }
-        }
-    }
 }
 
 void MiniR2D2Logic::moveHoloprojector()
