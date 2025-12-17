@@ -6,29 +6,69 @@ void MiniR2D2Logic::init()
     player.init();
     pinMode(MINI_R2D2_RANDOM_SEED_PIN, INPUT);
 
+    #ifdef ESC_DRIVE
     esc2.setup(
         MINI_R2D2_ESC_1_PIN,
         MINI_R2D2_CENTER_ESC_MICROSECONDS,
         MINI_R2D2_MIN_ESC_MICROSECONDS,
         MINI_R2D2_MAX_ESC_MICROSECONDS,
-        MINI_R2D2_ESC_1_REVERSE
+        MINI_R2D2_DRIVE_1_REVERSE
     );
     esc1.setup(
         MINI_R2D2_ESC_2_PIN,
         MINI_R2D2_CENTER_ESC_MICROSECONDS,
         MINI_R2D2_MIN_ESC_MICROSECONDS,
         MINI_R2D2_MAX_ESC_MICROSECONDS,
-        MINI_R2D2_ESC_2_REVERSE
+        MINI_R2D2_DRIVE_2_REVERSE
     );
 
     esc2.init();
     esc1.init();
 
     driveSystem.init(&esc1, &esc2);
+    #endif
 
+    #ifdef MX1508_DRIVE
+    drive1.setup(
+        MINI_R2D2_MX1508_1_PIN_1,
+        MINI_R2D2_MX1508_1_PIN_2,
+        MINI_R2D2_MX1508_MIN_DUTY,
+        MINI_R2D2_MX1508_MIN_LIMIT,
+        MINI_R2D2_MX1508_MAX_LIMIT,
+        MINI_R2D2_DRIVE_1_REVERSE
+    );
+    drive2.setup(
+        MINI_R2D2_MX1508_2_PIN_1,
+        MINI_R2D2_MX1508_2_PIN_2,
+        MINI_R2D2_MX1508_MIN_DUTY,
+        MINI_R2D2_MX1508_MIN_LIMIT,
+        MINI_R2D2_MX1508_MAX_LIMIT,
+        MINI_R2D2_DRIVE_2_REVERSE
+    );
+    drive1.init();
+    drive2.init();
+
+    driveSystem.init(&drive1, &drive2);
+    #endif
+
+    #ifdef SERVO_HEAD
     headServo.setup(
         MINI_R2D2_HEAD_SERVO_PIN
     );
+    headServo.init();
+    #endif
+
+    #ifdef MX1508_HEAD
+    headDrive.setup(
+        MINI_R2D2_MX1508_HEAD_PIN_1,
+        MINI_R2D2_MX1508_HEAD_PIN_2,
+        MINI_R2D2_MX1508_MIN_DUTY,
+        MINI_R2D2_MX1508_MIN_LIMIT,
+        MINI_R2D2_MX1508_MAX_LIMIT
+    );
+
+    headDrive.init();
+    #endif
 
     leftArmServo.setup(
         MINI_R2D2_LEFT_ARM_SERVO_PIN,
@@ -52,7 +92,6 @@ void MiniR2D2Logic::init()
         MINI_R2D2_CENTER_LIFT_SERVO_CENTER_ANGLE
     );
 
-    headServo.init();
     leftArmServo.init();
     rightArmServo.init();
     shoulderServo.init();
@@ -121,7 +160,13 @@ void MiniR2D2Logic::run()
         player.playFile(random(1, 54));
     }
 
+    #ifdef SERVO_HEAD
     headServo.run(controller.getBrakeThrottleMixed());
+    #endif
+
+    #ifdef MX1508_HEAD
+    headDrive.run(controller.getBrakeThrottleMixed());
+    #endif
 
     lightLogic.runNeopixelLedLight();
 

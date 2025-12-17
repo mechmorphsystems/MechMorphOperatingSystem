@@ -5,14 +5,19 @@
 #include "../DroidLogicInterface.h"
 #include "../../Controllers/GamepadController.h"
 #include "../../SoundPlayers/DfPlayerMini.h"
-#include "../../Movement/Esc.h"
 #include "../../Movement/ImprovedServo.h"
 #include "../../ScriptedAnimation/AnimationRunners/MiniR2D2AnimationRunner.h"
+#include "MiniR2D2LightLogic.h"
+#include "../../DriveSystems/TrackDriveSytem.h"
 #include <Adafruit_NeoPixel.h>
 #include <Wire.h>
 #include <Adafruit_PWMServoDriver.h>
-#include "MiniR2D2LightLogic.h"
-#include "../../DriveSystems/TrackDriveSytem.h"
+#ifdef ESC_DRIVE
+#include "../../Movement/Esc.h"
+#endif
+#if (defined MX1508_DRIVE || defined MX1508_HEAD)
+#include "../../Movement/Driver2Wire.h"
+#endif
 
 class MiniR2D2Logic : public DroidLogicInterface
 {
@@ -23,9 +28,20 @@ class MiniR2D2Logic : public DroidLogicInterface
         GamepadController controller;
         DfPlayerMini player;
         uint32_t timer = 0;
+        #ifdef ESC_DRIVE
         Esc esc1;
         Esc esc2;
+        #endif
+        #ifdef MX1508_DRIVE
+        Driver2Wire drive1;
+        Driver2Wire drive2;
+        #endif
+        #ifdef SERVO_HEAD
         ImprovedServo headServo;
+        #endif
+        #ifdef MX1508_HEAD
+        Driver2Wire headDrive;
+        #endif
         ImprovedServo leftArmServo;
         ImprovedServo rightArmServo;
         ImprovedServo shoulderServo;
