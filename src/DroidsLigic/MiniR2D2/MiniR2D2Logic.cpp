@@ -158,7 +158,13 @@ void MiniR2D2Logic::run()
 
     headDrive.run(controller.getBrakeThrottleMixed());
 
+    #ifdef NEO_PIXEL_LED
     lightLogic.runNeopixelLedLight();
+    #endif
+
+    #ifdef REGULAR_LED
+    lightLogic.runRegularLedLight();
+    #endif
 
     moveHoloprojector();
 }
