@@ -24,6 +24,8 @@ void MiniR2D2Logic::init()
     esc2.init();
     esc1.init();
 
+    driveSystem.init(&esc1, &esc2);
+
     headServo.setup(
         MINI_R2D2_HEAD_SERVO_PIN
     );
@@ -72,8 +74,7 @@ void MiniR2D2Logic::run()
 {
     controller.update();
 
-    runMotor();
-
+    driveSystem.run(controller.getLeftY(), controller.getRightX());
 
     //  if (controller.squareButtonClick() || animationRunnrer.isRunnung(0))
     // if (controller.squareButtonClick())
@@ -124,24 +125,6 @@ void MiniR2D2Logic::run()
     lightLogic.runNeopixelLedLight();
 
     moveHoloprojector();
-}
-
-void MiniR2D2Logic::runMotor()
-{
-    yValue = controller.getLeftY();
-    xValue = controller.getRightX();
-
-    rawLeft = xValue + yValue;
-    rawRight = xValue - yValue;
-
-    diff = abs(abs(xValue) - abs(yValue));
-    rawLeft = rawLeft < 0 ? rawLeft - diff : rawLeft + diff;
-    rawRight = rawRight < 0 ? rawRight - diff : rawRight + diff;
-
-    rawLeft = constrain(rawLeft, -512, 512);
-    rawRight = constrain(rawRight, -512, 512);
-    esc2.run(rawLeft);
-    esc1.run(rawRight);
 }
 
 void MiniR2D2Logic::moveHoloprojector()
