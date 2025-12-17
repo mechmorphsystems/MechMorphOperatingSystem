@@ -26,13 +26,18 @@ class MiniSentryAnimationRunner : public BaseAnimationRunner
     protected:
         void runCurrent() override
         {
-            if (millis() - timer > animation[currenAnimation][animationStep][4])
+            if (millis() - timer > animation[currenAnimation][animationStep][0])
             {
                 timer = millis();
-                leftDoorServo->writeAngle(animation[currenAnimation][animationStep][0]);
-                rightDoorServo->writeAngle(animation[currenAnimation][animationStep][1]);
-                digitalWrite(MINI_SENTRY_LEFT_DOOR_LED_PIN, animation[currenAnimation][animationStep][2]);
-                digitalWrite(MINI_SENTRY_RIGHT_DOOR_LED_PIN, animation[currenAnimation][animationStep][3]);
+                if (animation[currenAnimation][animationStep][1] > 0 && currentSound != animation[currenAnimation][animationStep][1]) {
+                    currentSound = animation[currenAnimation][animationStep][1];
+                    player->playFile(animation[currenAnimation][animationStep][1]);
+                }
+
+                leftDoorServo->writeAngle(animation[currenAnimation][animationStep][2]);
+                rightDoorServo->writeAngle(animation[currenAnimation][animationStep][3]);
+                digitalWrite(MINI_SENTRY_LEFT_DOOR_LED_PIN, animation[currenAnimation][animationStep][4]);
+                digitalWrite(MINI_SENTRY_RIGHT_DOOR_LED_PIN, animation[currenAnimation][animationStep][5]);
 
                 if (animationStep >= animationSteps[currenAnimation]) {
                     stop();
@@ -44,17 +49,17 @@ class MiniSentryAnimationRunner : public BaseAnimationRunner
     private:
         ImprovedServo* leftDoorServo;
         ImprovedServo* rightDoorServo;
-        u_int16_t PROGMEM animation[1][9][5] = {
+        u_int16_t PROGMEM animation[1][9][6] = {
             {
-                {180, 0, 0, 0, 300},
-                {180, 0, 1, 0, 200},
-                {180, 0, 0, 1, 200},
-                {180, 0, 1, 0, 200},
-                {180, 0, 0, 1, 200},
-                {180, 0, 1, 0, 200},
-                {180, 0, 0, 1, 200},
-                {180, 0, 1, 1, 200},
-                {MINI_SENTRY_LEFT_DOOR_ZERO_ANGLE, MINI_SENTRY_RIGHT_DOOR_ZERO_ANGLE, 0, 0, 200},
+                {300, 0, 180, 0, 0, 0},
+                {200, 0, 180, 0, 1, 0},
+                {200, 0, 180, 0, 0, 1},
+                {200, 0, 180, 0, 1, 0},
+                {200, 0, 180, 0, 0, 1},
+                {200, 0, 180, 0, 1, 0},
+                {200, 0, 180, 0, 0, 1},
+                {200, 0, 180, 0, 1, 1},
+                {200, 0, MINI_SENTRY_LEFT_DOOR_ZERO_ANGLE, MINI_SENTRY_RIGHT_DOOR_ZERO_ANGLE, 0, 0},
             }
         };
         u_int8_t PROGMEM animationSteps[1] = {

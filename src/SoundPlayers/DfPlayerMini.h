@@ -28,7 +28,7 @@ class DfPlayerMini : public SoundPlayerInterface
             player.volume(volumeLevel);
             player.stop();
         }
-        void playFile(uint8_t fileNumber) override
+        void playFile(uint16_t fileNumber) override
         {
             player.play(fileNumber);
         }

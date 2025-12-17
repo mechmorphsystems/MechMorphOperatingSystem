@@ -138,12 +138,11 @@ void MiniR2D2Logic::moveHoloprojector()
             holoprojectorStates[i] = !holoprojectorStates[i];
             
             if (holoprojectorStates[i]) {
-                servoDriver.setPWM(i, 0, random(275, 375));
+                servoDriver.setPWM(i, 0, random(MINI_R2D2_HOLOPROJECTOR_MIN_PVM, MINI_R2D2_HOLOPROJECTOR_MAX_PVM));
                 holoprojectorIntervals[i] = random(300, 500);
             } else {
-                servoDriver.setPWM(i, 0, MINI_R2D2_HOLOPROJECTOR_CENTER_PVM_VALUE);
+                servoDriver.setPWM(i, 0, MINI_R2D2_HOLOPROJECTOR_CENTER_PVM);
                 holoprojectorIntervals[i] = random(3000, 5000);
-            
             }
         }
     }

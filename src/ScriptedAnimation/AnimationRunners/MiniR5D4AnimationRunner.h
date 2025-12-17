@@ -31,10 +31,15 @@ class MiniR5D4AnimationRunner : public BaseAnimationRunner
             if (millis() - timer > animation[currenAnimation][animationStep][0])
             {
                 timer = millis();
-                leftArmServo->writeAngle(animation[currenAnimation][animationStep][1]);
-                rightArmServo->writeAngle(animation[currenAnimation][animationStep][2]);
-                shoulderServo->writeAngle(animation[currenAnimation][animationStep][3]);
-                centerLiftServo->writeAngle(animation[currenAnimation][animationStep][4]);
+                if (animation[currenAnimation][animationStep][1] > 0 && currentSound != animation[currenAnimation][animationStep][1]) {
+                    currentSound = animation[currenAnimation][animationStep][1];
+                    player->playFile(animation[currenAnimation][animationStep][1]);
+                }
+
+                leftArmServo->writeAngle(animation[currenAnimation][animationStep][2]);
+                rightArmServo->writeAngle(animation[currenAnimation][animationStep][3]);
+                shoulderServo->writeAngle(animation[currenAnimation][animationStep][4]);
+                centerLiftServo->writeAngle(animation[currenAnimation][animationStep][5]);
 
                 if (animationStep >= animationSteps[currenAnimation]) {
                     stop();
@@ -48,25 +53,25 @@ class MiniR5D4AnimationRunner : public BaseAnimationRunner
         ImprovedServo* rightArmServo;
         ImprovedServo* shoulderServo;
         ImprovedServo* centerLiftServo;
-        u_int16_t PROGMEM animation[4][4][5] = {
+        u_int16_t PROGMEM animation[4][4][6] = {
             {
-                {0, MINI_R2D2_LEFT_ARM_SERVO_CENTER_ANGLE, MINI_R2D2_RIGHT_ARM_SERVO_CENTER_ANGLE, 180, MINI_R2D2_CENTER_LIFT_SERVO_CENTER_ANGLE},
-                {2000, MINI_R2D2_LEFT_ARM_SERVO_CENTER_ANGLE, MINI_R2D2_RIGHT_ARM_SERVO_CENTER_ANGLE, 180, 175},
+                {0, 0, MINI_R2D2_LEFT_ARM_SERVO_CENTER_ANGLE, MINI_R2D2_RIGHT_ARM_SERVO_CENTER_ANGLE, 180, MINI_R2D2_CENTER_LIFT_SERVO_CENTER_ANGLE},
+                {2000, 0, MINI_R2D2_LEFT_ARM_SERVO_CENTER_ANGLE, MINI_R2D2_RIGHT_ARM_SERVO_CENTER_ANGLE, 180, 180},
             },
             {
-                {0, MINI_R2D2_LEFT_ARM_SERVO_CENTER_ANGLE, MINI_R2D2_RIGHT_ARM_SERVO_CENTER_ANGLE, 180, MINI_R2D2_CENTER_LIFT_SERVO_CENTER_ANGLE},
-                {2000, MINI_R2D2_LEFT_ARM_SERVO_CENTER_ANGLE, MINI_R2D2_RIGHT_ARM_SERVO_CENTER_ANGLE, MINI_R2D2_SHOULDER_SERVO_CENTER_ANGLE, MINI_R2D2_CENTER_LIFT_SERVO_CENTER_ANGLE},
+                {0, 0, MINI_R2D2_LEFT_ARM_SERVO_CENTER_ANGLE, MINI_R2D2_RIGHT_ARM_SERVO_CENTER_ANGLE, 180, MINI_R2D2_CENTER_LIFT_SERVO_CENTER_ANGLE},
+                {2000, 0, MINI_R2D2_LEFT_ARM_SERVO_CENTER_ANGLE, MINI_R2D2_RIGHT_ARM_SERVO_CENTER_ANGLE, MINI_R2D2_SHOULDER_SERVO_CENTER_ANGLE, MINI_R2D2_CENTER_LIFT_SERVO_CENTER_ANGLE},
             },
             {
-                {0, 150, 150, MINI_R2D2_SHOULDER_SERVO_CENTER_ANGLE, MINI_R2D2_CENTER_LIFT_SERVO_CENTER_ANGLE},
-                {300, MINI_R2D2_LEFT_ARM_SERVO_CENTER_ANGLE, MINI_R2D2_RIGHT_ARM_SERVO_CENTER_ANGLE, MINI_R2D2_SHOULDER_SERVO_CENTER_ANGLE, MINI_R2D2_CENTER_LIFT_SERVO_CENTER_ANGLE},
-                {300, 150, 150, MINI_R2D2_SHOULDER_SERVO_CENTER_ANGLE, MINI_R2D2_CENTER_LIFT_SERVO_CENTER_ANGLE},
-                {300, MINI_R2D2_LEFT_ARM_SERVO_CENTER_ANGLE, MINI_R2D2_RIGHT_ARM_SERVO_CENTER_ANGLE, MINI_R2D2_SHOULDER_SERVO_CENTER_ANGLE, MINI_R2D2_CENTER_LIFT_SERVO_CENTER_ANGLE},
+                {0, 0, 150, 150, MINI_R2D2_SHOULDER_SERVO_CENTER_ANGLE, MINI_R2D2_CENTER_LIFT_SERVO_CENTER_ANGLE},
+                {300, 0, MINI_R2D2_LEFT_ARM_SERVO_CENTER_ANGLE, MINI_R2D2_RIGHT_ARM_SERVO_CENTER_ANGLE, MINI_R2D2_SHOULDER_SERVO_CENTER_ANGLE, MINI_R2D2_CENTER_LIFT_SERVO_CENTER_ANGLE},
+                {300, 0, 150, 150, MINI_R2D2_SHOULDER_SERVO_CENTER_ANGLE, MINI_R2D2_CENTER_LIFT_SERVO_CENTER_ANGLE},
+                {300, 0, MINI_R2D2_LEFT_ARM_SERVO_CENTER_ANGLE, MINI_R2D2_RIGHT_ARM_SERVO_CENTER_ANGLE, MINI_R2D2_SHOULDER_SERVO_CENTER_ANGLE, MINI_R2D2_CENTER_LIFT_SERVO_CENTER_ANGLE},
             },
             {
-                {0, 90, 90, 0},
-                {0, 90, 90, 500},
-                {90, 90, 90, 1000},
+                {0, 0, 90, 90, 0},
+                {0, 0, 90, 90, 500},
+                {90, 0, 90, 90, 1000},
             }
         };
         u_int8_t PROGMEM animationSteps[4] = {
