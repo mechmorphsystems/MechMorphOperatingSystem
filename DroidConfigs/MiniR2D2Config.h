@@ -2,7 +2,7 @@
 #define ESC_DRIVE
 // #define MX1508_DRIVE
 #define SERVO_HEAD
-// #define MX1508_HEADss
+// #define MX1508_HEAD
 #define NEO_PIXEL_LED
 // #define REGULAR_LED
 
