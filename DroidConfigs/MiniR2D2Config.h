@@ -1,8 +1,8 @@
 // droid config
-#define ESC_DRIVE
-// #define MX1508_DRIVE
-#define SERVO_HEAD
-// #define MX1508_HEAD
+// #define ESC_DRIVE
+#define MX1508_DRIVE
+// #define SERVO_HEAD
+#define MX1508_HEAD
 #define NEO_PIXEL_LED
 // #define REGULAR_LED
 
@@ -30,9 +30,8 @@
 #define MINI_R2D2_MAX_ESC_MICROSECONDS 1900
 
 // MX1508 configuration
-#define MINI_R2D2_MX1508_MIN_DUTY 0
-#define MINI_R2D2_MX1508_MIN_LIMIT -255
-#define MINI_R2D2_MX1508_MAX_LIMIT 255
+#define MINI_R2D2_MX1508_MIN_PWM 0
+#define MINI_R2D2_MX1508_MAX_PWM 255
 
 // Drive configuration
 #define MINI_R2D2_DRIVE_1_REVERSE false

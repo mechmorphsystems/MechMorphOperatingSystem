@@ -27,17 +27,15 @@ void MiniR2D2Logic::init()
     drive1.setup(
         MINI_R2D2_MX1508_1_PIN_1,
         MINI_R2D2_MX1508_1_PIN_2,
-        MINI_R2D2_MX1508_MIN_DUTY,
-        MINI_R2D2_MX1508_MIN_LIMIT,
-        MINI_R2D2_MX1508_MAX_LIMIT,
+        MINI_R2D2_MX1508_MIN_PWM,
+        MINI_R2D2_MX1508_MAX_PWM,
         MINI_R2D2_DRIVE_1_REVERSE
     );
     drive2.setup(
         MINI_R2D2_MX1508_2_PIN_1,
         MINI_R2D2_MX1508_2_PIN_2,
-        MINI_R2D2_MX1508_MIN_DUTY,
-        MINI_R2D2_MX1508_MIN_LIMIT,
-        MINI_R2D2_MX1508_MAX_LIMIT,
+        MINI_R2D2_MX1508_MIN_PWM,
+        MINI_R2D2_MX1508_MAX_PWM,
         MINI_R2D2_DRIVE_2_REVERSE
     );
     
@@ -58,9 +56,8 @@ void MiniR2D2Logic::init()
     headDrive.setup(
         MINI_R2D2_MX1508_HEAD_PIN_1,
         MINI_R2D2_MX1508_HEAD_PIN_2,
-        MINI_R2D2_MX1508_MIN_DUTY,
-        MINI_R2D2_MX1508_MIN_LIMIT,
-        MINI_R2D2_MX1508_MAX_LIMIT
+        MINI_R2D2_MX1508_MIN_PWM,
+        MINI_R2D2_MX1508_MAX_PWM
     );
     #endif
 

@@ -2,7 +2,6 @@
 
 #include <Arduino.h>
 #include "MovementInterface.h"
-#include <GyverMotor.h>
 #include "../../Config.h"
 
 class Driver2Wire : public MovementInterface
@@ -11,23 +10,23 @@ class Driver2Wire : public MovementInterface
         void setup(
             uint8_t pin1,
             uint8_t pin2,
-            uint8_t minDuty,
-            int16_t minLimit,
-            uint16_t maxLimit,
+            int16_t minPwm,
+            uint16_t maxPwm,
             bool reverse = false
         ) {
             Driver2Wire::pin1 = pin1;
             Driver2Wire::pin2 = pin2;
-            Driver2Wire::minDuty = minDuty;
-            Driver2Wire::minLimit = minLimit;
-            Driver2Wire::maxLimit = maxLimit;
+            Driver2Wire::minPwm = minPwm;
+            Driver2Wire::maxPwm = maxPwm;
             Driver2Wire::reverse = reverse;
         }
         
         void init() override
         {
-            motor = GMotor(DRIVER2WIRE, pin1, pin2);
-            motor.setMinDuty(minDuty);
+            pinMode(pin1, OUTPUT);
+            pinMode(pin2, OUTPUT);
+            digitalWrite(pin1, LOW);
+            digitalWrite(pin2, LOW);
         }
 
         void run(int32_t value) override
@@ -35,20 +34,22 @@ class Driver2Wire : public MovementInterface
             if (reverse) {
                 value = -value;
             }
-            
 
             if (value > -STICK_DEADZONE && value < STICK_DEADZONE) {
-                motor.setSpeed(0);
+                digitalWrite(pin1, LOW);
+                digitalWrite(pin2, LOW);
+            } else if (value < 0) {
+                digitalWrite(pin1, LOW);
+                analogWrite(pin2, constrain(map(abs(value), 0, 512, minPwm, maxPwm), minPwm, maxPwm));
             } else {
-                motor.setSpeed(constrain(map(value, -255, 255, minLimit, maxLimit), minLimit, maxLimit));
+                analogWrite(pin1, constrain(map(value, 0, 512, minPwm, maxPwm), minPwm, maxPwm));
+                digitalWrite(pin2, LOW);
             }
         }
     private:
-        GMotor motor = GMotor(DRIVER2WIRE, pin1, pin2);
-        uint8_t pin1;
-        uint8_t pin2;
-        uint8_t minDuty;
-        int16_t minLimit = -255;
-        uint16_t maxLimit = 255;
+        uint8_t pin1 = 0;
+        uint8_t pin2 = 0;
+        int16_t minPwm = 0;
+        uint16_t maxPwm = 255;
         bool reverse = false;
 };
