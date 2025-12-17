@@ -17,6 +17,7 @@ class MiniR2D2Logic : public DroidLogicInterface
     public:
         void init();
         void run();
+        void NewFunction();
         void runMotor();
     private:
         GamepadController controller;

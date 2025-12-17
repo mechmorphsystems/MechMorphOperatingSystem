@@ -77,13 +77,13 @@ void MiniR2D2Logic::run()
     // if (controller.squareButtonClick())
     // {
     //     if (state) {
-    //         servoDriver.setPWM(3, 0, 600);
+    //         servoDriver.setPWM(3, 0, 240); // up
     //     } else {
-    //         servoDriver.setPWM(3, 0, 200);
+    //         servoDriver.setPWM(3, 0, 460); //down
     //     }
-
+    //     servoDriver.setPWM(4, 4096, 0); // high
+    //     servoDriver.setPWM(4, 0, 4096); // low
     //     state = !state;
-        
     // }
 
     if (controller.triangleButtonClick() || animationRunnrer.isRunnung(0))
@@ -236,9 +236,10 @@ void MiniR2D2Logic::HoloprojectorLight()
             ledStates[i] = !ledStates[i];
             
             if (ledStates[i]) {
-                pixel.setPixelColor(i, pixel.Color(255, 255, 255));
+                uint8_t lightLevel = random(0, 255);
+                pixel.setPixelColor(i, pixel.Color(lightLevel, lightLevel, lightLevel));
             } else {
-                pixel.setPixelColor(i, pixel.Color(125, 125, 125));
+                pixel.setPixelColor(i, pixel.Color(0, 0, 0));
             }
         }
     }
@@ -255,11 +256,12 @@ void MiniR2D2Logic::moveHoloprojector()
             holoprojectorStates[i] = !holoprojectorStates[i];
             
             if (holoprojectorStates[i]) {
-                servoDriver.setPWM(i, 0, random(150, 600));
-                holoprojectorIntervals[i] = random(1000);
+                servoDriver.setPWM(i, 0, random(275, 375));
+                holoprojectorIntervals[i] = random(300, 500);
             } else {
-                servoDriver.setPWM(i, 0, 360);
-                holoprojectorIntervals[i] = random(10000, 15000);
+                servoDriver.setPWM(i, 0, MINI_R2D2_HOLOPROJECTOR_CENTER_PVM_VALUE);
+                holoprojectorIntervals[i] = random(3000, 5000);
+            
             }
         }
     }
