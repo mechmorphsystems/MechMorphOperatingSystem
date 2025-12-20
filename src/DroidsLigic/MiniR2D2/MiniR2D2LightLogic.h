@@ -50,27 +50,27 @@ class MiniR2D2LightLogic
             600
         };
         uint8_t neoPixelLedHighLight [10][3] = {
-            {255, 255, 255},
-            {255, 255, 255},
-            {0, 255, 0},
+            {MINI_R2D2_NEO_PIXEL_LED_BRIGHTNESS, MINI_R2D2_NEO_PIXEL_LED_BRIGHTNESS, MINI_R2D2_NEO_PIXEL_LED_BRIGHTNESS},
+            {MINI_R2D2_NEO_PIXEL_LED_BRIGHTNESS, MINI_R2D2_NEO_PIXEL_LED_BRIGHTNESS, MINI_R2D2_NEO_PIXEL_LED_BRIGHTNESS},
+            {0, MINI_R2D2_NEO_PIXEL_LED_BRIGHTNESS, 0},
             {0, 0, 0},
             {0, 0, 0},
-            {255, 0, 0},
+            {MINI_R2D2_NEO_PIXEL_LED_BRIGHTNESS, 0, 0},
             {0, 0, 0},
-            {255, 0, 0},
-            {255, 0, 0},
-            {255, 0, 0},
+            {MINI_R2D2_NEO_PIXEL_LED_BRIGHTNESS, 0, 0},
+            {MINI_R2D2_NEO_PIXEL_LED_BRIGHTNESS, 0, 0},
+            {MINI_R2D2_NEO_PIXEL_LED_BRIGHTNESS, 0, 0},
         };
         uint8_t neoPixelLedLowLight [10][3] = {
-            {0, 0, 255},
-            {0, 0, 255},
-            {0, 0, 255},
+            {0, 0, MINI_R2D2_NEO_PIXEL_LED_BRIGHTNESS},
+            {0, 0, MINI_R2D2_NEO_PIXEL_LED_BRIGHTNESS},
+            {0, 0, MINI_R2D2_NEO_PIXEL_LED_BRIGHTNESS},
             {0, 0, 0},
             {0, 0, 0},
-            {255, 255, 0},
+            {MINI_R2D2_NEO_PIXEL_LED_BRIGHTNESS, MINI_R2D2_NEO_PIXEL_LED_BRIGHTNESS, 0},
             {0, 0, 0},
-            {0, 255, 0},
-            {0, 255, 0},
-            {0, 255, 0},
+            {0, MINI_R2D2_NEO_PIXEL_LED_BRIGHTNESS, 0},
+            {0, MINI_R2D2_NEO_PIXEL_LED_BRIGHTNESS, 0},
+            {0, MINI_R2D2_NEO_PIXEL_LED_BRIGHTNESS, 0},
         };
 };

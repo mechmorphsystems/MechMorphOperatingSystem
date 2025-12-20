@@ -1,8 +1,8 @@
 // droid config
-// #define ESC_DRIVE
-#define MX1508_DRIVE
-// #define SERVO_HEAD
-#define MX1508_HEAD
+#define ESC_DRIVE
+// #define MX1508_DRIVE
+#define SERVO_HEAD
+// #define MX1508_HEAD
 #define NEO_PIXEL_LED
 // #define REGULAR_LED
 
@@ -55,3 +55,6 @@
 // periscope config
 #define MINI_R2D2_PERISCOPE_DOWN_PVM 460
 #define MINI_R2D2_PERISCOPE_UP_PVM 240
+
+// neo pixel config
+#define MINI_R2D2_NEO_PIXEL_LED_BRIGHTNESS 128
