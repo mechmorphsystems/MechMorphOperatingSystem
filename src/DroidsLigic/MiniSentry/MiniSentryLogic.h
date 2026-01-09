@@ -22,7 +22,7 @@ class MiniSentryLogic : public DroidLogicInterface
         Esc esc1;
         Esc esc2;
         Esc esc3;
-        MiniSentryAnimationRunner animationRunnrer;
+        MiniSentryAnimationRunner animationRunner;
         float yValue;
         float xValue;
         float theta;

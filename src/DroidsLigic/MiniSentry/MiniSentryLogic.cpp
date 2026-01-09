@@ -46,7 +46,7 @@ void MiniSentryLogic::init()
     leftDoorServo.writeAngle(MINI_SENTRY_LEFT_DOOR_ZERO_ANGLE);
     rightDoorServo.writeAngle(MINI_SENTRY_RIGHT_DOOR_ZERO_ANGLE);
 
-    animationRunnrer.setup(&leftDoorServo, &rightDoorServo);
+    animationRunner.setup(&leftDoorServo, &rightDoorServo);
     
     for (uint8_t i = 0; i < 7; i++) {
         pinMode(leds[i], OUTPUT);
@@ -61,12 +61,12 @@ void MiniSentryLogic::run()
     movement();
     ledBlink();
 
-    if (controller.triangleButtonClick() || animationRunnrer.isRunnung(0)) {
-        animationRunnrer.run(0);
+    if (controller.triangleButtonClick() || animationRunner.isRunnung(0)) {
+        animationRunner.run(0);
     }
 
     if (controller.croossButtonClick()) {
-        animationRunnrer.stop();
+        animationRunner.stop();
     }
 
     
