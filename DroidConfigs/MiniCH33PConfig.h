@@ -1,7 +1,8 @@
 // pin configuration
 #define MINI_CH_33P_ESC_1_PIN 26
 #define MINI_CH_33P_ESC_2_PIN 25
-#define MINI_CH_33P_HEAD_SERVO_PIN 15
+#define MINI_CH_33P_HEAD_SERVO_PIN 27
+#define MINI_CH_33P_ARM_SERVO_PIN 14
 #define MINI_CH_33P_RANDOM_SEED_PIN 36
 
 // ESC configuration
@@ -10,3 +11,6 @@
 #define MINI_CH_33P_MAX_ESC_MICROSECONDS 1900
 #define MINI_CH_33P_ESC_1_REVERSE false
 #define MINI_CH_33P_ESC_2_REVERSE true
+
+// Arm servo config
+#define MINI_CH_33P_ARM_SERVO_CENTER_ANGLE 105
